@@ -199,6 +199,21 @@ const asideMenuConfig = [
         path: '/chat/detail'
       }
     ]
+  },
+  {
+    name: 'task',
+    path: '/task',
+    icon: 'task',
+    children: [
+      {
+        name: 'list',
+        path: '/task/list'
+      },
+      {
+        name: 'detail',
+        path: '/task/detail'
+      }
+    ]
   }
 ];
 
