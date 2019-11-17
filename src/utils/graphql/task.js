@@ -22,7 +22,6 @@ const admin_taskList = `query {
             search_keyword
 
             orders {
-              xx
               type
               buyTimes
               browseTimes
