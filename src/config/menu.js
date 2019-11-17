@@ -173,6 +173,17 @@ const asideMenuConfig = [
         path: '/store/list'
       }
     ]
+  },
+  {
+    name: 'bill',
+    path: '/bill',
+    icon: 'rmb',
+    children: [
+      {
+        name: 'list',
+        path: '/bill/list'
+      }
+    ]
   }
 ];
 

@@ -28,6 +28,13 @@ const NoticeList = React.lazy(() => import('@/pages/lmc_NoticeList'));
 const StoreList = React.lazy(() => import('@/pages/lmc_StoreList'));
 const StoreDetail = React.lazy(() => import('@/pages/lmc_StoreDetail'));
 
+const BillList = React.lazy(() => import('@/pages/lmc_billList'));
+// const MessageList = React.lazy(() => import('@/pages/lmc_messageList'));
+
+// const TaskList = React.lazy(() => import('@/pages/lmc_taskList'));
+// const TaskDetail = React.lazy(() => import('@/pages/lmc_taskDetail'));
+// const OrderList = React.lazy(() => import('@/pages/lmc_orderList'));
+
 const routerConfig = [
   {
     path: '/user',
@@ -133,6 +140,10 @@ const routerConfig = [
       {
         path: '/store/detail',
         component: StoreDetail
+      },
+      {
+        path: '/bill/list',
+        component: BillList
       },
 
       {
