@@ -11,5 +11,5 @@ function BasicList() {
 }
 
 export default withAuth({
-  authorities: ['admin', 'user'],
+  authorities: ['admin', 'user']
 })(BasicList);

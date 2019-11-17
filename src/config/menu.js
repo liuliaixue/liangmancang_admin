@@ -8,15 +8,15 @@ const headerMenuConfig = [
     path: 'https://github.com/alibaba/ice',
     external: true,
     newWindow: true,
-    icon: 'message',
+    icon: 'message'
   },
   {
     name: 'help',
     path: 'https://alibaba.github.io/ice',
     external: true,
     newWindow: true,
-    icon: 'bangzhu',
-  },
+    icon: 'bangzhu'
+  }
 ];
 
 const asideMenuConfig = [
@@ -27,9 +27,9 @@ const asideMenuConfig = [
     children: [
       {
         name: 'monitor',
-        path: '/dashboard/monitor',
-      },
-    ],
+        path: '/dashboard/monitor'
+      }
+    ]
   },
   {
     name: 'chart',
@@ -38,13 +38,13 @@ const asideMenuConfig = [
     children: [
       {
         name: 'basic',
-        path: '/chart/basic',
+        path: '/chart/basic'
       },
       {
         name: 'general',
-        path: '/chart/general',
-      },
-    ],
+        path: '/chart/general'
+      }
+    ]
   },
   {
     name: '表格页',
@@ -53,15 +53,15 @@ const asideMenuConfig = [
     children: [
       {
         name: 'basic',
-        path: '/table/basic',
+        path: '/table/basic'
         // authority: 'admin',
       },
       {
         name: 'general',
-        path: '/table/general',
+        path: '/table/general'
         // authority: 'user',
-      },
-    ],
+      }
+    ]
   },
   {
     name: '列表页',
@@ -70,13 +70,13 @@ const asideMenuConfig = [
     children: [
       {
         name: 'basic',
-        path: '/list/basic',
+        path: '/list/basic'
       },
       {
         name: 'general',
-        path: '/list/general',
-      },
-    ],
+        path: '/list/general'
+      }
+    ]
   },
   {
     name: 'profile',
@@ -85,13 +85,13 @@ const asideMenuConfig = [
     children: [
       {
         name: 'basic',
-        path: '/profile/basic',
+        path: '/profile/basic'
       },
       {
         name: 'terms',
-        path: '/profile/general',
-      },
-    ],
+        path: '/profile/general'
+      }
+    ]
   },
   {
     name: 'result',
@@ -100,13 +100,13 @@ const asideMenuConfig = [
     children: [
       {
         name: 'success',
-        path: '/result/success',
+        path: '/result/success'
       },
       {
         name: 'fail',
-        path: '/result/fail',
-      },
-    ],
+        path: '/result/fail'
+      }
+    ]
   },
   {
     name: 'account',
@@ -115,9 +115,9 @@ const asideMenuConfig = [
     children: [
       {
         name: 'setting',
-        path: '/account/setting',
-      },
-    ],
+        path: '/account/setting'
+      }
+    ]
   },
   {
     name: 'exception',
@@ -126,22 +126,38 @@ const asideMenuConfig = [
     children: [
       {
         name: '204',
-        path: '/exception/204',
+        path: '/exception/204'
       },
       {
         name: '403',
-        path: '/exception/403',
+        path: '/exception/403'
       },
       {
         name: '404',
-        path: '/exception/404',
+        path: '/exception/404'
       },
       {
         name: '500',
-        path: '/exception/500',
-      },
-    ],
+        path: '/exception/500'
+      }
+    ]
   },
+  {
+    name: 'notice',
+    path: '/notice',
+    icon: 'notice',
+    children: [
+      {
+        name: 'editor',
+        path: '/notice/editor/new'
+      },
+
+      {
+        name: 'list',
+        path: '/notice/list'
+      }
+    ]
+  }
 ];
 
 export { headerMenuConfig, asideMenuConfig };

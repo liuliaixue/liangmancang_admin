@@ -22,6 +22,9 @@ const Forbidden = React.lazy(() => import('@/pages/Forbidden'));
 const NotFound = React.lazy(() => import('@/pages/NotFound'));
 const ServerError = React.lazy(() => import('@/pages/ServerError'));
 
+const NoticeEditor = React.lazy(() => import('@/pages/TestEditor'));
+const NoticeList = React.lazy(() => import('@/pages/TestNoticeList'));
+
 const routerConfig = [
   {
     path: '/user',
@@ -29,20 +32,20 @@ const routerConfig = [
     children: [
       {
         path: '/login',
-        component: UserLogin,
+        component: UserLogin
       },
       {
         path: '/register',
-        component: UserRegister,
+        component: UserRegister
       },
       {
         path: '/',
-        redirect: '/user/login',
+        redirect: '/user/login'
       },
       {
-        component: NotFound,
-      },
-    ],
+        component: NotFound
+      }
+    ]
   },
   {
     path: '/',
@@ -50,77 +53,86 @@ const routerConfig = [
     children: [
       {
         path: '/dashboard/monitor',
-        component: Dashboard,
+        component: Dashboard
       },
       {
         path: '/chart/general',
-        component: Charts,
+        component: Charts
       },
       {
         path: '/chart/basic',
-        component: BasicCharts,
+        component: BasicCharts
       },
       {
         path: '/list/basic',
-        component: BasicList,
+        component: BasicList
       },
       {
         path: '/list/general',
-        component: ProjectList,
+        component: ProjectList
       },
       {
         path: '/result/success',
-        component: Result,
+        component: Result
       },
       {
         path: '/result/fail',
-        component: Fail,
+        component: Fail
       },
       {
         path: '/table/basic',
-        component: BasicTable,
+        component: BasicTable
       },
       {
         path: '/profile/basic',
-        component: Profile,
+        component: Profile
       },
       {
         path: '/profile/general',
-        component: Terms,
+        component: Terms
       },
       {
         path: '/table/general',
-        component: GeneralTable,
+        component: GeneralTable
       },
       {
         path: '/account/setting',
-        component: Setting,
+        component: Setting
       },
       {
         path: '/exception/500',
-        component: ServerError,
+        component: ServerError
       },
       {
         path: '/exception/403',
-        component: Forbidden,
+        component: Forbidden
       },
       {
         path: '/exception/204',
-        component: Empty,
+        component: Empty
       },
       {
         path: '/exception/404',
-        component: NotFound,
+        component: NotFound
       },
+      {
+        path: '/notice/editor',
+        component: NoticeEditor
+      },
+      {
+        path: '/notice/list',
+        component: NoticeList
+      },
+
       {
         path: '/',
-        redirect: '/dashboard/monitor',
+        redirect: '/dashboard/monitor'
       },
       {
-        component: NotFound,
-      },
-    ],
-  },
+        component: NotFound
+      }
+    ]
+  }
 ];
 
 export default routerConfig;

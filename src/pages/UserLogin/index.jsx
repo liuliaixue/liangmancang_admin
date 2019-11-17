@@ -3,19 +3,20 @@ import { Link } from 'react-router-dom';
 import FoundationSymbol from '@icedesign/foundation-symbol';
 import { Input, Checkbox, Grid, Form, Message } from '@alifd/next';
 import { useRequest } from '@/utils/request';
-import { userLogin } from '@/config/dataSource';
+import { userLogin, adminLogin } from '@/config/dataSource';
 import styles from './index.module.scss';
+import { setToken } from '@/utils/user';
 
 const Icon = FoundationSymbol;
 const { Row } = Grid;
 const FormItem = Form.Item;
 
 function UserLogin(props) {
-  const { loading, request } = useRequest(userLogin);
+  const { loading, request } = useRequest(adminLogin);
   const [value, setValue] = useState({
     username: '',
     password: '',
-    checkbox: false,
+    checkbox: false
   });
 
   function formChange(formValue) {
@@ -32,9 +33,11 @@ function UserLogin(props) {
 
   async function handleLogin(params) {
     try {
-      await request({
-        data: params,
+      const res = await request({
+        data: params
       });
+      // console.log('*******', res);
+      setToken(res.response.data.token);
       Message.success('登录成功');
       props.history.push('/');
     } catch (err) {
@@ -89,11 +92,11 @@ function UserLogin(props) {
             </p>
           </Row>
 
-          <Row className="tips">
+          {/* <Row className="tips">
             <Link to="/user/register" className={styles.tipsText}>
               立即注册
             </Link>
-          </Row>
+          </Row> */}
         </Form>
       </div>
     </div>

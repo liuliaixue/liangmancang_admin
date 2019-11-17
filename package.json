@@ -18,9 +18,11 @@
     "@icedesign/theme": "^1.x",
     "axios": "^0.17.1",
     "bizcharts": "^3.2.2",
+    "braft-editor": "^2.3.8",
     "classnames": "^2.2.5",
     "cookie": "^0.4.0",
     "enquire-js": "^0.1.2",
+    "graphql-request": "^1.8.2",
     "history": "^4.7.2",
     "hoist-non-react-statics": "^2.5.5",
     "intl": "^1.2.5",
@@ -34,17 +36,18 @@
     "react-router-dom": "^5.0.1"
   },
   "devDependencies": {
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "@ice/spec": "^0.1.1",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "eslint": "^6.0.1",
-    "stylelint": "^10.1.0",
-    "ice-scripts": "^2.0.0",
     "ice-plugin-fusion": "^0.1.4",
-    "ice-plugin-moment-locales": "^0.1.0"
+    "ice-plugin-moment-locales": "^0.1.0",
+    "ice-scripts": "^2.0.0",
+    "stylelint": "^10.1.0"
   },
   "scripts": {
     "start": "ice-scripts dev",
     "build": "ice-scripts build",
+    "update-remote": "scp -i ~/.ssh/kaixinguo_test.pem -r ./build/ root@101.132.64.25:/home/lmc/liangmancang_admin",
     "lint": "npm run eslint && npm run stylelint",
     "eslint": "eslint --cache --ext .js,.jsx ./",
     "stylelint": "stylelint ./**/*.scss"

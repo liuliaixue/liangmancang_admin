@@ -32,11 +32,14 @@ export default {
   'app.menu.exception.403': '403',
   'app.menu.exception.500': '500',
 
+  'app.menu.test': '测试',
+  'app.menu.test.editor': '测试,编辑器',
+
   // Top Header
   'app.header.feedback': '反馈',
   'app.header.help': '帮助',
   'app.header.user.name': '淘小宝',
   'app.header.user.department': '技术部',
   'app.header.user.setting': '设置',
-  'app.header.user.logout': '退出',
+  'app.header.user.logout': '退出'
 };

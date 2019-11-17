@@ -27,7 +27,6 @@ export async function request(options) {
   }
 }
 
-
 /**
  * Hooks to make ajax request
  *
@@ -42,7 +41,7 @@ export function useRequest(options) {
   const initialState = {
     response: null,
     loading: false,
-    error: null,
+    error: null
   };
   const [state, dispatch] = useReducer(requestReducer, initialState);
 
@@ -57,12 +56,11 @@ export function useRequest(options) {
   async function request(config) {
     try {
       dispatch({
-        type: 'init',
+        type: 'init'
       });
-
       const response = await axios({
         ...options,
-        ...config,
+        ...config
       });
 
       const { error } = handleResponse(response);
@@ -72,19 +70,19 @@ export function useRequest(options) {
       } else {
         dispatch({
           type: 'success',
-          response,
+          response
         });
         return {
           response,
           error: null,
-          loading: false,
+          loading: false
         };
       }
     } catch (error) {
       showError(error.message);
       dispatch({
         type: 'error',
-        error,
+        error
       });
       throw error;
     }
@@ -92,7 +90,7 @@ export function useRequest(options) {
 
   return {
     ...state,
-    request,
+    request
   };
 }
 
@@ -108,25 +106,25 @@ function requestReducer(state, action) {
       return {
         repsonse: null,
         error: null,
-        loading: true,
+        loading: true
       };
     case 'success':
       return {
         response: action.response,
         error: null,
-        loading: false,
+        loading: false
       };
     case 'error':
       return {
         response: null,
         error: action.error,
-        loading: false,
+        loading: false
       };
     default:
       return {
         repsonse: null,
         error: null,
-        loading: false,
+        loading: false
       };
   }
 }
@@ -141,14 +139,15 @@ function handleResponse(response) {
   const { data } = response;
   // Please modify the status key according to your business logic
   // normally the key is `status` or `code`
-  if (data.status === 'SUCCESS') {
-    return { data };
-  } else if (data.status === 'NOT_LOGIN') {
-    location.href = '';
-  } else {
-    const error = new Error(data.message || '后端接口异常');
-    return { error };
-  }
+  // if (data.status === 'SUCCESS') {
+  //   return { data };
+  // } else if (data.status === 'NOT_LOGIN') {
+  //   location.href = '';
+  // } else {
+  //   const error = new Error(data.message || '后端接口异常');
+  //   return { error };
+  // }
+  return data;
 }
 
 /**
@@ -160,7 +159,6 @@ function showError(errorMessage) {
   Message.show({
     type: 'error',
     title: '错误消息',
-    content: errorMessage,
+    content: errorMessage
   });
 }
-
