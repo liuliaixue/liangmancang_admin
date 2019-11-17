@@ -157,6 +157,22 @@ const asideMenuConfig = [
         path: '/notice/list'
       }
     ]
+  },
+  {
+    name: 'store',
+    path: '/store',
+    icon: 'shop',
+    children: [
+      {
+        name: 'detail',
+        path: '/store/detail'
+      },
+
+      {
+        name: 'list',
+        path: '/store/list'
+      }
+    ]
   }
 ];
 

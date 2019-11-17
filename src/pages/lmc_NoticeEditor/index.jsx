@@ -7,12 +7,12 @@ import BraftEditor from 'braft-editor';
 
 import IceContainer from '@icedesign/container';
 import { Input, Radio, Switch, Upload, Grid, Form, Message } from '@alifd/next';
-import graphqlClient, {
+import graphqlClient from '@/utils/graphqlClient';
+import {
   admin_newNotice,
   notice,
   admin_updateNotice
-} from '@/utils/graphqlClient';
-// import styles from './index.module.scss';
+} from '@/utils/graphql/notice';
 
 const FormItem = Form.Item;
 const { Row, Col } = Grid;

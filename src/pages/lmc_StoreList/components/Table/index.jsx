@@ -5,12 +5,9 @@ import IceContainer from '@icedesign/container';
 import FilterTag from '../FilterTag';
 import FilterForm from '../FilterForm';
 import styles from './index.module.scss';
-import graphqlClient, {
-  noticeList,
-  admin_removeNotice
-} from '@/utils/graphqlClient';
+import graphqlClient from '@/utils/graphqlClient';
 import moment from 'moment';
-
+import { admin_storeList, store } from '@/utils/graphql/store';
 // Random Numbers
 const random = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -22,46 +19,42 @@ export default function GoodsTable(props) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetchData();
+    fetchData(current);
   }, []);
 
-  async function fetchData(len) {
+  async function fetchData(currentPage) {
     await setLoading(true);
 
-    const res = await graphqlClient(noticeList, { skip: 0, limit: 50 });
-    setData(res['noticeList'].list);
+    const res = await graphqlClient(admin_storeList, {
+      skip: (currentPage - 1) * 10,
+      limit: 10
+    });
+    setData(res['admin_storeList'].list);
     setLoading(false);
   }
 
   async function handlePaginationChange(currentPage) {
     await setCurrent(currentPage);
-    fetchData();
+    fetchData(currentPage);
   }
 
   function handleFilterChange() {
-    fetchData();
+    // fetchData();
   }
 
-  async function handleDelete(record) {
+  async function handleDisable(record) {
     Dialog.confirm({
       title: '提示',
-      content: '确认删除吗',
+      content: '确认冻结吗',
       onOk: async () => {
-        const res = await graphqlClient(admin_removeNotice, {
-          _id: record._id
-        });
-
+        alert('还没有实现哦...');
         fetchData(10);
       }
     });
   }
 
   function handleDetail(record) {
-    // Dialog.confirm({
-    //   title: '提示',
-    //   content: '暂不支持查看详情'
-    // });
-    props.history.push(`/notice/editor?_id=${record._id}`);
+    props.history.push(`/store/detail?_id=${record._id}`);
   }
 
   function renderOper(value, index, record) {
@@ -74,8 +67,8 @@ export default function GoodsTable(props) {
         >
           <FormattedMessage id="app.btn.detail" />
         </Button>
-        <Button type="normal" warning onClick={() => handleDelete(record)}>
-          <FormattedMessage id="app.btn.delete" />
+        <Button type="normal" warning onClick={() => handleDisable(record)}>
+          冻结
         </Button>
       </div>
     );
@@ -89,16 +82,20 @@ export default function GoodsTable(props) {
       </IceContainer>
       <IceContainer>
         <Table loading={isLoading} dataSource={data} hasBorder={false}>
-          <Table.Column title="标题" dataIndex="title" />
+          <Table.Column title="店铺" dataIndex="name" />
           <Table.Column
-            title="更新时间"
-            dataIndex="updatedAt"
-            cell={props =>
-              moment(props.updatedAt).format('YYYY-MM-DD HH:mm:ss')
+            title="创建时间"
+            dataIndex="createdAt"
+            cell={(value, index, record) =>
+              moment(record.createdAt).format('YYYY-MM-DD')
             }
           />
-          <Table.Column title="内容" dataIndex="content" />
-
+          <Table.Column title="快照" dataIndex="storeScreenShotImage" />
+          <Table.Column title="店铺网址" dataIndex="website" />
+          <Table.Column title="旺旺号" dataIndex="wangwang" />
+          <Table.Column title="联系方式" dataIndex="contactPhone" />
+          <Table.Column title="联系人地址" dataIndex="address" />
+          <Table.Column title="状态" dataIndex="status" />
           <Table.Column
             title="操作"
             width={200}

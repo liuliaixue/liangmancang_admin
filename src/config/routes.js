@@ -22,8 +22,11 @@ const Forbidden = React.lazy(() => import('@/pages/Forbidden'));
 const NotFound = React.lazy(() => import('@/pages/NotFound'));
 const ServerError = React.lazy(() => import('@/pages/ServerError'));
 
-const NoticeEditor = React.lazy(() => import('@/pages/TestEditor'));
-const NoticeList = React.lazy(() => import('@/pages/TestNoticeList'));
+const NoticeEditor = React.lazy(() => import('@/pages/lmc_NoticeEditor'));
+const NoticeList = React.lazy(() => import('@/pages/lmc_NoticeList'));
+
+const StoreList = React.lazy(() => import('@/pages/lmc_StoreList'));
+const StoreDetail = React.lazy(() => import('@/pages/lmc_StoreDetail'));
 
 const routerConfig = [
   {
@@ -122,6 +125,14 @@ const routerConfig = [
       {
         path: '/notice/list',
         component: NoticeList
+      },
+      {
+        path: '/store/list',
+        component: StoreList
+      },
+      {
+        path: '/store/detail',
+        component: StoreDetail
       },
 
       {
