@@ -184,6 +184,21 @@ const asideMenuConfig = [
         path: '/bill/list'
       }
     ]
+  },
+  {
+    name: 'chat',
+    path: '/chat',
+    icon: 'message',
+    children: [
+      {
+        name: 'chat-list',
+        path: '/chat/list'
+      },
+      {
+        name: 'chat-detail',
+        path: '/chat/detail'
+      }
+    ]
   }
 ];
 

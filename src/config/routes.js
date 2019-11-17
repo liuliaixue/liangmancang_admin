@@ -28,8 +28,9 @@ const NoticeList = React.lazy(() => import('@/pages/lmc_NoticeList'));
 const StoreList = React.lazy(() => import('@/pages/lmc_StoreList'));
 const StoreDetail = React.lazy(() => import('@/pages/lmc_StoreDetail'));
 
-const BillList = React.lazy(() => import('@/pages/lmc_billList'));
-// const MessageList = React.lazy(() => import('@/pages/lmc_messageList'));
+const BillList = React.lazy(() => import('@/pages/lmc_BillList'));
+const ChatList = React.lazy(() => import('@/pages/lmc_ChatList'));
+const ChatDetail = React.lazy(() => import('@/pages/lmc_ChatDetail'));
 
 // const TaskList = React.lazy(() => import('@/pages/lmc_taskList'));
 // const TaskDetail = React.lazy(() => import('@/pages/lmc_taskDetail'));
@@ -146,6 +147,14 @@ const routerConfig = [
         component: BillList
       },
 
+      {
+        path: '/chat/list',
+        component: ChatList
+      },
+      {
+        path: '/chat/detail',
+        component: ChatDetail
+      },
       {
         path: '/',
         redirect: '/dashboard/monitor'
