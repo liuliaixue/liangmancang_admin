@@ -13,6 +13,8 @@ import {
   notice,
   admin_updateNotice
 } from '@/utils/graphql/notice';
+import { uploadFileToken } from '@/utils/graphql/uploadFile';
+import * as qiniu from 'qiniu-js';
 
 const FormItem = Form.Item;
 const { Row, Col } = Grid;
@@ -40,7 +42,7 @@ export default class PageDemo extends React.Component {
     // this.setState({
     //   editorState: BraftEditor.createEditorState(htmlContent)
     // });
-    console.log('@cccccccccccccc', this.props);
+
     // if (this.props.location.search.startWith('?_id=')) {
     //   const _id = this.props.location.search.slice(0, -4);
     //   console.log(_id);
@@ -64,6 +66,43 @@ export default class PageDemo extends React.Component {
         editorState: BraftEditor.createEditorState(res['notice'].content)
       });
     }
+  }
+  async uploadFn(param) {
+    const serverURL = 'http://upload-server';
+    const xhr = new XMLHttpRequest();
+    const fd = new FormData();
+
+    console.log({ param });
+
+    const filename = param.file.name;
+    const res = await graphqlClient(uploadFileToken, { filename });
+    console.log(res['uploadFileToken']);
+    const { key, uploadToken } = res['uploadFileToken'];
+    const observable = qiniu.upload(param.file, key, uploadToken, {}, {});
+    const observer = {
+      next(event) {
+        // ...
+        console.log('@next', event);
+        param.progress((event.loaded / event.total) * 100);
+      },
+      error(err) {
+        // ...
+        console.log('@error', err);
+        param.error({
+          msg: 'unable to upload.'
+        });
+      },
+      complete(res) {
+        // ...
+        console.log('@complete', res);
+        param.success({
+          url: res.url
+        });
+      }
+    };
+    const subscription = observable.subscribe(observer); // 上传开始
+
+    return;
   }
 
   render() {
@@ -118,6 +157,7 @@ export default class PageDemo extends React.Component {
                 value={this.state.editorState}
                 onChange={this.handleChange}
                 placeholder="请输入正文内容"
+                media={{ uploadFn: this.uploadFn }}
               />
             </FormItem>
             <Row style={{ marginTop: 20 }}>

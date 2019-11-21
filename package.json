@@ -30,6 +30,7 @@
     "moment": "^2.24.0",
     "path-to-regexp": "^2.2.1",
     "prop-types": "^15.5.8",
+    "qiniu-js": "^2.5.5",
     "react": "^16.2.0",
     "react-dom": "^16.4.1",
     "react-intl": "^2.8.0",
