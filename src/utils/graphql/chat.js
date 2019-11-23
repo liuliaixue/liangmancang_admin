@@ -5,11 +5,12 @@ const admin_chatList = `query admin_chatList($skip:Int, $limit:Int){
             _id
             content
             taskid
-            type
             chatroom
             image
             phone
             userid
+            type
+
             createdAt
             updatedAt
           }
@@ -26,6 +27,9 @@ const chat = `query Chat($chatroom:String){
       content
       taskid
       userid
+      chatroom
+      image
+      phone
       type
       createdAt
       updatedAt

@@ -14,10 +14,25 @@ const random = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
+const billStatusMap = {
+  DEFAULT: '待审核',
+  CHECKED: '已审核'
+};
+const billTypeMap = {
+  DEFAULT: '充值',
+  PROMOTION: '推广获得',
+  TASK_LOCK: '任务锁定',
+  TASK_REFUND: '任务退款',
+  TASK_PAYMENT: '任务奖励',
+  WITHDRAW: '提现'
+};
+export { billStatusMap };
+
 export default function GoodsTable(props) {
   const [current, setCurrent] = useState(1);
   const [isLoading, setLoading] = useState(false);
   const [data, setData] = useState([]);
+  let limit = 10;
 
   useEffect(() => {
     fetchData(current);
@@ -27,8 +42,8 @@ export default function GoodsTable(props) {
     await setLoading(true);
 
     const res = await graphqlClient(admin_billList, {
-      skip: (currentPage - 1) * 10,
-      limit: 10
+      skip: (currentPage - 1) * limit,
+      limit
     });
     setData(res['admin_billList'].list);
     setLoading(false);
@@ -80,10 +95,10 @@ export default function GoodsTable(props) {
 
   return (
     <div className={styles.container}>
-      <IceContainer>
+      {/* <IceContainer>
         <FilterTag onChange={handleFilterChange} />
         <FilterForm onChange={handleFilterChange} />
-      </IceContainer>
+      </IceContainer> */}
       <IceContainer>
         <Table loading={isLoading} dataSource={data} hasBorder={false}>
           <Table.Column title="用户" dataIndex="userid" />
@@ -114,15 +129,27 @@ export default function GoodsTable(props) {
             dataIndex="withdraw"
             cell={(v, i, record) => `${record.amount / 100} 元`}
           />
-          <Table.Column title="操作" dataIndex="type" />
+          <Table.Column
+            title="操作"
+            dataIndex="type"
+            cell={v => billTypeMap[v]}
+          />
           <Table.Column
             title="金额"
             dataIndex="amount"
             cell={(v, i, record) => `${record.amount / 100} 元`}
           />
           <Table.Column title="充值信息" cell={renderInfo} />
-
-          <Table.Column title="状态" dataIndex="status" />
+          <Table.Column
+            title="更新时间"
+            dataIndex="updatedAt"
+            cell={v => moment(v).format('YYYY-MM-DD hh:mm:ss')}
+          />
+          <Table.Column
+            title="状态"
+            dataIndex="status"
+            cell={v => billStatusMap[v]}
+          />
           <Table.Column
             title="操作"
             width={200}

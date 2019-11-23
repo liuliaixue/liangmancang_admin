@@ -48,7 +48,7 @@
   "scripts": {
     "start": "ice-scripts dev",
     "build": "ice-scripts build",
-    "update-remote": "scp -i ~/.ssh/kaixinguo_test.pem -r ./build/ root@101.132.64.25:/home/lmc/liangmancang_admin",
+    "update-remote": "npm run build && scp -i ~/.ssh/kaixinguo_test.pem -r ./build/ root@101.132.64.25:/home/lmc/liangmancang_admin",
     "lint": "npm run eslint && npm run stylelint",
     "eslint": "eslint --cache --ext .js,.jsx ./",
     "stylelint": "stylelint ./**/*.scss"

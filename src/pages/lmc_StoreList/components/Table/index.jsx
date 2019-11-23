@@ -13,6 +13,13 @@ const random = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
+const storeStatusMap = {
+  DEFAULT: '未审核',
+  OK: '已审核',
+  BAD: '未通过'
+};
+export { storeStatusMap };
+
 export default function GoodsTable(props) {
   const [current, setCurrent] = useState(1);
   const [isLoading, setLoading] = useState(false);
@@ -76,10 +83,10 @@ export default function GoodsTable(props) {
 
   return (
     <div className={styles.container}>
-      <IceContainer>
+      {/* <IceContainer>
         <FilterTag onChange={handleFilterChange} />
         <FilterForm onChange={handleFilterChange} />
-      </IceContainer>
+      </IceContainer> */}
       <IceContainer>
         <Table loading={isLoading} dataSource={data} hasBorder={false}>
           <Table.Column title="店铺" dataIndex="name" />
@@ -95,7 +102,11 @@ export default function GoodsTable(props) {
           <Table.Column title="旺旺号" dataIndex="wangwang" />
           <Table.Column title="联系方式" dataIndex="contactPhone" />
           <Table.Column title="联系人地址" dataIndex="address" />
-          <Table.Column title="状态" dataIndex="status" />
+          <Table.Column
+            title="状态"
+            dataIndex="status"
+            cell={v => storeStatusMap[v]}
+          />
           <Table.Column
             title="操作"
             width={200}

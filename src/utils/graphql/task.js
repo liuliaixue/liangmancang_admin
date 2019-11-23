@@ -26,6 +26,7 @@ const admin_taskList = `query {
               buyTimes
               browseTimes
               collectTimes
+              collect
               searchKeyword
               goodsSpecification
               comment
@@ -73,12 +74,14 @@ const task = `query Task($_id:String!){
       buyTimes
       browseTimes
       collectTimes
+      collect
       searchKeyword
       goodsSpecification
       comment
       pictures
       remark
     }
+    orderQuantity
     startTime
     endTime
     commission
@@ -123,6 +126,7 @@ const admin_updateTaskStatusChecked = `
             buyTimes
             browseTimes
             collectTimes
+            collect
             searchKeyword
             goodsSpecification
             comment

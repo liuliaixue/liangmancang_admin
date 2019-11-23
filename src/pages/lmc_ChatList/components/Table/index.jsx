@@ -65,10 +65,10 @@ export default function GoodsTable(props) {
 
   return (
     <div className={styles.container}>
-      <IceContainer>
+      {/* <IceContainer>
         <FilterTag onChange={handleFilterChange} />
         <FilterForm onChange={handleFilterChange} />
-      </IceContainer>
+      </IceContainer> */}
       <IceContainer>
         <Table loading={isLoading} dataSource={data} hasBorder={false}>
           <Table.Column
@@ -101,6 +101,11 @@ export default function GoodsTable(props) {
             title="phone"
             dataIndex="phone"
             cell={(v, i, record) => record.list[0].handlePaginationChange}
+          />
+          <Table.Column
+            title="type"
+            dataIndex="type"
+            cell={(v, i, record) => record.list[0].type}
           />
 
           <Table.Column

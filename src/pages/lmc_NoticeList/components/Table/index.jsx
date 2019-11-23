@@ -18,22 +18,26 @@ export default function GoodsTable(props) {
   const [current, setCurrent] = useState(1);
   const [isLoading, setLoading] = useState(false);
   const [data, setData] = useState([]);
+  let limit = 10;
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  async function fetchData(len) {
+  async function fetchData(currentPage = 1) {
     await setLoading(true);
 
-    const res = await graphqlClient(noticeList, { skip: 0, limit: 50 });
+    const res = await graphqlClient(noticeList, {
+      skip: (currentPage - 1) * limit,
+      limit
+    });
     setData(res['noticeList'].list);
     setLoading(false);
   }
 
   async function handlePaginationChange(currentPage) {
     await setCurrent(currentPage);
-    fetchData();
+    fetchData(currentPage);
   }
 
   function handleFilterChange() {
@@ -49,7 +53,7 @@ export default function GoodsTable(props) {
           _id: record._id
         });
 
-        fetchData(10);
+        fetchData(current);
       }
     });
   }
@@ -60,6 +64,9 @@ export default function GoodsTable(props) {
     //   content: '暂不支持查看详情'
     // });
     props.history.push(`/notice/editor?_id=${record._id}`);
+  }
+  function handleNew() {
+    props.history.push('/notice/editor/new');
   }
 
   function renderOper(value, index, record) {
@@ -82,20 +89,28 @@ export default function GoodsTable(props) {
   return (
     <div className={styles.container}>
       <IceContainer>
+        <Button type="primary" style={{ float: 'right' }} onClick={handleNew}>
+          新建公告
+        </Button>
+      </IceContainer>
+
+      {/* <IceContainer>
         <FilterTag onChange={handleFilterChange} />
         <FilterForm onChange={handleFilterChange} />
-      </IceContainer>
+      </IceContainer> */}
       <IceContainer>
         <Table loading={isLoading} dataSource={data} hasBorder={false}>
           <Table.Column title="标题" dataIndex="title" />
           <Table.Column
             title="更新时间"
             dataIndex="updatedAt"
-            cell={props =>
-              moment(props.updatedAt).format('YYYY-MM-DD HH:mm:ss')
-            }
+            cell={value => moment(value).format('YYYY-MM-DD HH:mm:ss')}
           />
-          <Table.Column title="内容" dataIndex="content" />
+          <Table.Column
+            title="内容"
+            dataIndex="content"
+            cell={value => value.slice(0, 60)}
+          />
 
           <Table.Column
             title="操作"

@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 import BasicDetailInfo from './components/BasicDetailInfo';
-
-import CollapseCard from './components/CollapseCard';
-
 import DetailTable from './components/DetailTable';
 
 import graphqlClient from '@/utils/graphqlClient';
-// import { chat, admin_messageFeedback } from '@/utils/graphql/chat';
 import { Button, Input, Message } from '@alifd/next';
 
 import { task, admin_updateTaskStatusChecked } from '@/utils/graphql/task';
@@ -38,7 +34,9 @@ export default function Profile(props) {
 
   return (
     <div className="profile-page">
-      <pre> {JSON.stringify(data, null, 2)}</pre>
+      {/* <pre> {JSON.stringify(data, null, 2)}</pre> */}
+      <BasicDetailInfo dataSource={data} />
+      <DetailTable dataSource={data.orders} />
       {data.status === 'DEFAULT' && (
         <Button type="primary" disabled>
           编辑中

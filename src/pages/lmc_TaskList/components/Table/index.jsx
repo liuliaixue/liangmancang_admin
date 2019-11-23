@@ -64,10 +64,10 @@ export default function GoodsTable(props) {
 
   return (
     <div className={styles.container}>
-      <IceContainer>
+      {/* <IceContainer>
         <FilterTag onChange={handleFilterChange} />
         <FilterForm onChange={handleFilterChange} />
-      </IceContainer>
+      </IceContainer> */}
       <IceContainer>
         <Table loading={isLoading} dataSource={data} hasBorder={false}>
           <Table.Column title="userid" dataIndex="userid" />

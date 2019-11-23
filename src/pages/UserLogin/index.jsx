@@ -5,7 +5,7 @@ import { Input, Checkbox, Grid, Form, Message } from '@alifd/next';
 import { useRequest } from '@/utils/request';
 import { userLogin, adminLogin } from '@/config/dataSource';
 import styles from './index.module.scss';
-import { setToken } from '@/utils/user';
+import { setToken, setUser } from '@/utils/user';
 
 const Icon = FoundationSymbol;
 const { Row } = Grid;
@@ -38,6 +38,7 @@ function UserLogin(props) {
       });
       // console.log('*******', res);
       setToken(res.response.data.token);
+      setUser(res.response.data.user);
       Message.success('登录成功');
       props.history.push('/');
     } catch (err) {

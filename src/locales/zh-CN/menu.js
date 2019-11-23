@@ -35,6 +35,26 @@ export default {
   'app.menu.test': '测试',
   'app.menu.test.editor': '测试,编辑器',
 
+  'app.menu.notice': '公告',
+  'app.menu.notice.editor.new': '新建公告',
+  'app.menu.notice.list': '公告列表',
+
+  'app.menu.store': '店铺',
+  'app.menu.store.detail': '店铺详情',
+  'app.menu.store.list': '店铺列表',
+
+  'app.menu.bill': '账单',
+  'app.menu.bill.detail': '账单详情',
+  'app.menu.bill.list': '账单列表',
+
+  'app.menu.chat': '消息',
+  'app.menu.chat.list': '消息列表',
+  'app.menu.chat.detail': '消息详情',
+
+  'app.menu.task': '任务',
+  'app.menu.task.list': '任务列表',
+  'app.menu.task.detail': '任务详情',
+
   // Top Header
   'app.header.feedback': '反馈',
   'app.header.help': '帮助',

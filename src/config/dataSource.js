@@ -1,5 +1,4 @@
-// export const server = `http://localhost:4040`;
-export const server = `http://101.132.64.25:60000`;
+export const server = $server;
 
 export const userProfile = {
   url: '/api/profile',

@@ -19,7 +19,7 @@ const headerMenuConfig = [
   }
 ];
 
-const asideMenuConfig = [
+let asideMenuConfig = [
   {
     name: 'Dashboard',
     path: '/dashboard',
@@ -148,11 +148,6 @@ const asideMenuConfig = [
     icon: 'notice',
     children: [
       {
-        name: 'editor',
-        path: '/notice/editor/new'
-      },
-
-      {
         name: 'list',
         path: '/notice/list'
       }
@@ -163,11 +158,6 @@ const asideMenuConfig = [
     path: '/store',
     icon: 'shop',
     children: [
-      {
-        name: 'detail',
-        path: '/store/detail'
-      },
-
       {
         name: 'list',
         path: '/store/list'
@@ -193,10 +183,6 @@ const asideMenuConfig = [
       {
         name: 'chat-list',
         path: '/chat/list'
-      },
-      {
-        name: 'chat-detail',
-        path: '/chat/detail'
       }
     ]
   },
@@ -208,13 +194,10 @@ const asideMenuConfig = [
       {
         name: 'list',
         path: '/task/list'
-      },
-      {
-        name: 'detail',
-        path: '/task/detail'
       }
     ]
   }
 ];
+asideMenuConfig = asideMenuConfig.slice(8);
 
 export { headerMenuConfig, asideMenuConfig };
