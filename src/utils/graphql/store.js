@@ -55,7 +55,7 @@ const admin_updateStoreStatusOK = `mutation Admin_updateStoreStatusOK($_id:Strin
   }
 }
 `;
-const admin_updateStoreStatusBAD = `mutation Admin_updateStoreStatusBAD($_id:String) {
+const admin_updateStoreStatusBAD = `mutation Admin_updateStoreStatusBAD($_id:String!) {
   admin_updateStoreStatus(_id: $_id, status: BAD) {
     _id
     name
