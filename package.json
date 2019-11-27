@@ -16,6 +16,7 @@
     "@icedesign/label": "^1.x",
     "@icedesign/layout": "^1.x",
     "@icedesign/theme": "^1.x",
+    "ali-oss": "^6.2.1",
     "axios": "^0.17.1",
     "bizcharts": "^3.2.2",
     "braft-editor": "^2.3.8",

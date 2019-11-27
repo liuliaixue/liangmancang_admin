@@ -12,6 +12,8 @@ function BasicTable() {
   );
 }
 
-export default withAuth({
-  authorities: ['admin'],
-})(BasicTable);
+export default BasicTable;
+
+// export default withAuth({
+//   authorities: ['admin'],
+// })(BasicTable);

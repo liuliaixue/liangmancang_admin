@@ -13,8 +13,9 @@ import {
   notice,
   admin_updateNotice
 } from '@/utils/graphql/notice';
-import { uploadFileToken } from '@/utils/graphql/uploadFile';
+import { uploadFileToken, ossUploadToken } from '@/utils/graphql/uploadFile';
 import * as qiniu from 'qiniu-js';
+import OSS from 'ali-oss';
 
 const FormItem = Form.Item;
 const { Row, Col } = Grid;
@@ -104,6 +105,63 @@ export default class PageDemo extends React.Component {
 
     return;
   }
+  async ossUploadFn(param) {
+    console.log({ param });
+
+    const filename = param.file.name;
+    const res = await graphqlClient(ossUploadToken, { filename });
+    console.log(res['ossUploadToken']);
+    const tokenFromServer = res['ossUploadToken'];
+    let client = new OSS({
+      secure: true, // false to get http file url
+      region: tokenFromServer.region,
+      //云账号AccessKey有所有API访问权限，建议遵循阿里云安全最佳实践，创建并使用STS方式来进行API访问
+      accessKeyId: tokenFromServer.accessKeyId,
+      accessKeySecret: tokenFromServer.accessKeySecret,
+      stsToken: tokenFromServer.stsToken,
+      bucket: tokenFromServer.bucket
+    });
+    let r1 = await client.multipartUpload(tokenFromServer.key, param.file, {
+      parallel: 4,
+      partSize: 1024 * 1024,
+      progress: (p, checkpoint, res) => {
+        console.log(p, checkpoint, res);
+        param.progress(p * 100);
+      }
+    });
+    // console.log('put success: %j', r1);
+    param.success({
+      url: tokenFromServer.url
+    });
+
+    return;
+
+    const observable = qiniu.upload(param.file, key, uploadToken, {}, {});
+    const observer = {
+      next(event) {
+        // ...
+        console.log('@next', event);
+        param.progress((event.loaded / event.total) * 100);
+      },
+      error(err) {
+        // ...
+        console.log('@error', err);
+        param.error({
+          msg: 'unable to upload.'
+        });
+      },
+      complete(res) {
+        // ...
+        console.log('@complete', res);
+        param.success({
+          url: res.url
+        });
+      }
+    };
+    const subscription = observable.subscribe(observer); // 上传开始
+
+    return;
+  }
 
   render() {
     return (
@@ -157,7 +215,7 @@ export default class PageDemo extends React.Component {
                 value={this.state.editorState}
                 onChange={this.handleChange}
                 placeholder="请输入正文内容"
-                media={{ uploadFn: this.uploadFn }}
+                media={{ uploadFn: this.ossUploadFn }}
               />
             </FormItem>
             <Row style={{ marginTop: 20 }}>

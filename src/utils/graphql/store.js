@@ -55,8 +55,8 @@ const admin_updateStoreStatusOK = `mutation Admin_updateStoreStatusOK($_id:Strin
   }
 }
 `;
-const admin_updateStoreStatusBAD = `mutation Admin_updateStoreStatusBAD($_id:String!) {
-  admin_updateStoreStatus(_id: $_id, status: BAD) {
+const admin_updateStoreStatusBAD = `mutation Admin_updateStoreStatusBAD($_id:String!, $message: String) {
+  admin_updateStoreStatus(_id: $_id, message: $message, status: BAD) {
     _id
     name
     userid
@@ -67,6 +67,7 @@ const admin_updateStoreStatusBAD = `mutation Admin_updateStoreStatusBAD($_id:Str
     address
     contactPhone
     status
+    message
     createdAt
     updatedAt
   }

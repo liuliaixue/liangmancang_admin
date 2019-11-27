@@ -5,4 +5,16 @@ const uploadFileToken = `mutation UploadFileToken($filename:String){
   }
 }
 `;
-export { uploadFileToken };
+
+const ossUploadToken = `mutation ossUploadToken($filename: String){
+  ossUploadToken(filename: $filename){
+    region
+    bucket
+    key
+    url
+    accessKeyId
+    accessKeySecret
+    stsToken
+  }
+}`;
+export { uploadFileToken, ossUploadToken };

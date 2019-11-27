@@ -1,5 +1,5 @@
-const admin_taskList = `query {
-        admin_taskList(skip: 0, limit: 10, ) {
+const admin_taskList = `query Admin_taskList($skip: Int!, $limit:Int! ){
+        admin_taskList(skip: $skip, limit: $limit ) {
           list {
             _id
             platform
@@ -154,4 +154,61 @@ const admin_updateTaskStatusChecked = `
         }
       }`;
 
-export { admin_taskList, task, admin_updateTaskStatusChecked };
+const admin_updateTaskStatusBAD = `
+      mutation Admin_updateTaskStatusBAD($_id: String!, $message: String){
+        admin_updateTaskStatus(_id: $_id, message: $message, status: BAD) {
+          _id
+          platform
+          type
+
+          goodsName
+          goodsLink
+          goodsImage
+          goodsPrice
+          goodsTotal
+          goodsPriceShowed
+          goodsSpecification
+          isFreeShipping
+
+          search_sort
+          search_ReceiverNum
+          search_price_from
+          search_price_to
+          search_where
+          search_keyword
+
+          orders {
+            type
+            buyTimes
+            browseTimes
+            collectTimes
+            collectGoods
+            collectStore
+            addToCart
+            searchKeyword
+            goodsSpecification
+            comment
+            pictures
+            remark
+          }
+          startTime
+          endTime
+          commission
+          platformServiceFee
+          platformCommission
+          extraCommission
+          extraImages
+          status
+          message
+          storeid
+          userid
+          createdAt
+          updatedAt
+        }
+      }`;
+export {
+  admin_taskList,
+  task,
+  admin_updateTaskStatusChecked,
+  admin_updateTaskStatusBAD
+};

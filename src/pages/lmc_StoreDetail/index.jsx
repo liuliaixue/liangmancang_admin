@@ -14,6 +14,7 @@ import {
 } from '@/utils/graphql/store';
 import { Button } from '@alifd/next';
 import { Message } from '@alifd/next';
+import EditRejectDialog from './components/EditRejectDialog';
 
 export default function Profile(props) {
   const [storeData, setStoreData] = useState({ _id: '' });
@@ -45,6 +46,15 @@ export default function Profile(props) {
     await setStoreData(res['admin_updateStoreStatus']);
     Message.success('保存成功');
   }
+  async function rejectWithMessage(message) {
+    // console.log({ rejectWithMessage: message });
+    const res = await graphqlClient(admin_updateStoreStatusBAD, {
+      _id: storeData._id,
+      message
+    });
+    await setStoreData(res['admin_updateStoreStatus']);
+    Message.success('保存成功');
+  }
 
   return (
     <div className="profile-page">
@@ -55,16 +65,25 @@ export default function Profile(props) {
       <div style={{ margin: '0 0 20px 20px' }}>
         {storeData.status === 'DEFAULT' && (
           <>
-            <Button type="primary" onClick={handleClickStoreCheck}>
+            <Button
+              type="primary"
+              onClick={handleClickStoreCheck}
+              style={{ marginRight: '15px' }}
+            >
               通过
             </Button>
-            <Button
+            {/* <Button
               type="default"
               onClick={handleClickStoreReject}
               style={{ marginLeft: '15px' }}
             >
               不通过
-            </Button>
+            </Button> */}
+            <EditRejectDialog
+              record={storeData}
+              // getFormValues={getFormValues}
+              rejectWithMessage={rejectWithMessage}
+            />
           </>
         )}
         {storeData.status === 'BAD' && (

@@ -6,16 +6,21 @@ import FilterTag from '../FilterTag';
 import FilterForm from '../FilterForm';
 import styles from './index.module.scss';
 import moment from 'moment';
+import { getUser } from '@/utils/user';
 
 export default function GoodsTable(props) {
   function renderImage(src) {
-    return <img src={src} />;
+    return src && <img src={src} />;
+  }
+  function renderUser(v, i, record) {
+    const currentUser = getUser();
+    return currentUser._id === record.userid ? '我' : record.userid;
   }
   return (
     <div className={styles.container}>
       <IceContainer>
         <Table dataSource={props.data} hasBorder={true}>
-          <Table.Column title="user" dataIndex="userid" />
+          <Table.Column title="user" dataIndex="userid" cell={renderUser} />
           <Table.Column title="phone" dataIndex="phone" />
           <Table.Column title="content" dataIndex="content" />
           <Table.Column

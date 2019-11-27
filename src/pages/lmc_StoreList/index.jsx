@@ -10,8 +10,6 @@ function BasicList(props) {
   );
 }
 
-// export default withAuth({
-//   authorities: ['admin', 'user']
-// })(BasicList);
-
-export default BasicList;
+export default withAuth({
+  authorities: ['admin', 'user']
+})(BasicList);
