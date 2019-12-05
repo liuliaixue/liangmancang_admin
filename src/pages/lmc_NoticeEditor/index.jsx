@@ -215,7 +215,7 @@ export default class PageDemo extends React.Component {
                 value={this.state.editorState}
                 onChange={this.handleChange}
                 placeholder="请输入正文内容"
-                media={{ uploadFn: this.ossUploadFn }}
+                media={{ uploadFn: this.uploadFn }}
               />
             </FormItem>
             <Row style={{ marginTop: 20 }}>
